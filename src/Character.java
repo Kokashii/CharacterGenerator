@@ -13,7 +13,7 @@ public class Character {
 
         do {
             System.out.println("What is your name?");
-            String name = scanner.nextLine();
+            name = scanner.nextLine();
             System.out.println(name + " correct? (Yes/No)");
 
             confirm = scanner.nextLine().trim();
@@ -29,8 +29,11 @@ public class Character {
         } while (confirm.equalsIgnoreCase("no"));
 
         do {
-            int allocation = 100;
+            int Allocation = 50;
             System.out.println("Allocate your Stats! Strength increases your damage, Defense increases your resistance to damage!");
+            System.out.println("First choose your Strength. Enter a value between 1-50 for your Strength.");
+            Strength = scanner.nextInt();
+
 
         }
     }
