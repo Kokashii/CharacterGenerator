@@ -6,10 +6,12 @@ public class Character {
     public int Defense;
     public int Health = 100;
     public int Special = 50;
+    public int Allocation = 50;
+    String confirm = "No";
 
-    public charGen {
-        Scanner scanner = new Scanner(System.in);
-        String confirm = "No";
+    public Scanner scanner = new Scanner(System.in);
+
+    public void charGen() {
 
         do {
             System.out.println("What is your name?");
@@ -18,7 +20,7 @@ public class Character {
 
             confirm = scanner.nextLine().trim();
 
-            if (confirm.equalsIgnoreCase("yes")){
+            if (confirm.equalsIgnoreCase("yes")) {
                 break;
             } else if (confirm.equalsIgnoreCase("no")) {
                 continue;
@@ -28,13 +30,27 @@ public class Character {
             }
         } while (confirm.equalsIgnoreCase("no"));
 
-        do {
-            int Allocation = 50;
-            System.out.println("Allocate your Stats! Strength increases your damage, Defense increases your resistance to damage!");
+        public void getStrength () {
             System.out.println("First choose your Strength. Enter a value between 1-50 for your Strength.");
             Strength = scanner.nextInt();
 
+            if (Strength >= 50 || Strength <= 0) {
+                System.out.println("Please enter a valid input.");
+                Allocation = 50;
+            } else if (Strength >= 1 && Strength <= 50) {
+                Allocation = 50 - Strength;
+            }
+        }
+
+        public void getDefense () {
 
         }
+
+        void displayStats () {
+            System.out.println("Current Stats:");
+            System.out.println("Name " + name);
+            System.out.println("Strength " + Strength);
+            System.out.println("Defense " + Defense);
+        }
+
     }
-}
