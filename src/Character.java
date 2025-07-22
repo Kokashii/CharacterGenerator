@@ -10,8 +10,7 @@ public class Character {
     String confirm = "No";
 
     public Scanner scanner = new Scanner(System.in);
-//Currently program ignores confirm prompt and automatically exits after displayStats. Need to reconfigure how to loop
-    //Consider changing looping from while?
+
     public void charGen() {
         do {
             getName();
@@ -21,6 +20,7 @@ public class Character {
             displayStats();
 
             System.out.println("Is this information correct? (Yes/No)");
+            confirm = scanner.nextLine().trim(); //Clears pre-existing empty string from integer prompts
             confirm = scanner.nextLine().trim();
 
             if (confirm.equalsIgnoreCase("yes")) {
@@ -35,16 +35,19 @@ public class Character {
 
     }
 
+    //Getter for player name
     public void getName() {
             System.out.println("What is your name?");
             name = scanner.nextLine();
     }
 
+    //Getter method for Strength stat
     public void getStrength() {
         do {
             System.out.println("First choose your Strength. Enter a value between 1-50 for your Strength.");
             Strength = scanner.nextInt();
 
+            //Logic to control flow correct inputs
             if (Strength >= 1 && Strength <= 50) {
                 Allocation = 50 - Strength;
             } else {
@@ -52,7 +55,7 @@ public class Character {
             }
         } while (Allocation == 50);
     }
-//Change while condition due to input not cycling to Special. As is it keeps allowing you to increase your defense but never go elsewhere.
+//Get defense for player
     public void getDefense() {
 
         if (Allocation > 0) {
@@ -60,6 +63,7 @@ public class Character {
                 System.out.println("Now choose your Defense. Remaining points to allocate: " + Allocation);
                 Defense = scanner.nextInt();
 
+                //Logic to control flow correct inputs
                 if (Defense <= Allocation) {
                     Allocation = Allocation - Defense;
                 } else {
@@ -71,6 +75,7 @@ public class Character {
         }
     }
 
+    //Get special stat for player
     public void getSpecial() {
         if (Allocation > 0) {
             do {
@@ -82,12 +87,13 @@ public class Character {
                 } else {
                     System.out.println("You've utilized all stat allocation points.");
                 }
-            } while (Allocation > 0);
+            } while (Allocation > 0); //This is to make sure the player inputs a correct response, and doesn't try to cheat the system. Currently running into problem where if they don't allocate remaining amount, it'll continue to ask for this value until allocation is 0.
         } else {
             System.out.println("You've utilized all stat allocation points.");
         }
     }
 
+    //Display final stats
         public void displayStats () {
             System.out.println("Current Stats:");
             System.out.println("Name: " + name);
